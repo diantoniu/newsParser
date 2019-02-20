@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-import re
+import re, os
 import datetime
 import urllib.request
 from parser.models import News
@@ -125,6 +125,9 @@ class TsnParser:
         False
             if in the database already exists the same News item
         """
+
+        if not os.path.exists('static/img'):
+            os.makedirs('static/img')
 
         soup = self.parseHtml(url)
         for div in soup.find_all('div', {'class': 'c-sidebar'}):
