@@ -1,0 +1,95 @@
+<script type="text/javascript">
+    $(function () {
+        $(function () {
+            $('.paginator').click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr('href');
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    success: function (data) {
+                        $('#newsList').html(data);
+                    },
+                    error: function (xhr, status, e) {
+                        console.log(status, e)
+                    }
+                });
+            });
+        });
+    });
+</script>
+
+{% load static %}
+
+{% if newsList %}
+    <div class="leftbar_content">
+        {% for news in newsList %}
+            <div class="single_stuff fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                <div class="single_stuff_article">
+                    <div class="single_sarticle_inner">
+                    <span class="category">
+                        {% for category in categories %}
+                            {% if category.id == news.categoryId %}
+                                {{ category.name }}
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                        <div class="link">
+                            {{ news.time | time }}
+                        </div>
+                        <span class="source">
+                        {% if news.text == "" %}
+                            ukr net
+                        {% else %}
+                            tsn ua
+                        {% endif %}
+                    </span>
+                        <div class="link">
+                            <a class="link_click" target="_blank" href="{{ news.url }}">{{ news.url }}</a>
+                        </div>
+
+
+                        <div class="stuff_article_inner"><span
+                                class="stuff_date">{{ news.time|date:"M" }} <strong>{{ news.time.day }}</strong></span>
+                            <h2><a target="_blank" href="{{ news.url }}">{{ news.title }}</a></h2>
+                            <span>{{ news.text|linebreaks }}</span>
+                        </div>
+                    </div>
+                    {% if  news.picture != '' %}
+                        {% with 'img/'|add:news.picture|add:'' as image %}
+                            <div class="single_stuff_img"><a id="image_link" target="_blank" href="{{ news.url }}"><img
+                                    id="image_tag"
+                                    src="{% static image %}"
+                                    alt=""></a>
+                            </div>
+                        {% endwith %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+{% endif %}
+
+{% if newsList %}
+    <div class="stuffpost_paginatinonarea">
+        <ul class="newstuff_pagnav">
+            <li><a href="getNewsList/?page=1&{{ original_request }}" class="paginator">first</a></li>
+            {% if newsList.has_previous %}
+                <li><a href="getNewsList/?page={{ newsList.previous_page_number }}&{{ original_request }}"
+                       class="paginator">previous</a>
+                </li>
+            {% endif %}
+            <li><a href="getNewsList/?page={{ newsList.number }}&{{ original_request }}"
+                   class="paginator">{{ newsList }}</a>
+            </li>
+            {% if newsList.has_next %}
+                <li><a href="getNewsList/?page={{ newsList.next_page_number }}&{{ original_request }}"
+                       class="paginator">next</a>
+                </li>
+            {% endif %}
+            <li><a href="getNewsList/?page={{ newsList.paginator.num_pages }}&{{ original_request }}"
+                   class="paginator">last</a></li>
+        </ul>
+    </div>
+{% endif %}

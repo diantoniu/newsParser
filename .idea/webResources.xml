@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebResourcesPaths">
+    <contentEntries>
+      <entry url="file://$PROJECT_DIR$">
+        <entryData>
+          <resourceRoots>
+            <path value="file://$PROJECT_DIR$/static/img" />
+            <path value="file://$PROJECT_DIR$/static/css" />
+            <path value="file://$PROJECT_DIR$/static/fonts" />
+            <path value="file://$PROJECT_DIR$/static/images" />
+            <path value="file://$PROJECT_DIR$/static/js" />
+            <path value="file://$PROJECT_DIR$/static/sass" />
+            <path value="file://$PROJECT_DIR$/static/assets" />
+            <path value="file://$PROJECT_DIR$/static/assets/css" />
+            <path value="file://$PROJECT_DIR$/static/assets/fonts" />
+            <path value="file://$PROJECT_DIR$/static/assets/js" />
+            <path value="file://$PROJECT_DIR$/templates/images" />
+            <path value="file://$PROJECT_DIR$/static/newsParser" />
+            <path value="file://$PROJECT_DIR$/static" />
+          </resourceRoots>
+        </entryData>
+      </entry>
+    </contentEntries>
+  </component>
+</project>
